@@ -1,44 +1,48 @@
 $(function(){
   
-  // create new connection to firebase
-   // REPLACE it with your link also change the firebase security rules to public
-	// var ref = new Firebase('https://test-ecf98.firebaseio.com');
 
-$('#logout').click(function(event){
-  console.log('clicked');
 
-  firebase.auth().signOut().then(function() {
-   console.log("signOut successfull");
-}).catch(function(error) {
-   console.log(error);
-});
-})
+var signOut = function(){
+
+    firebase.auth().signOut().then(function() {
+       console.log("signOut successfull");
+        location.reload();
+        console.log(err);
+    }).catch(function(error) {
+       console.log(error);
+        location.reload();
+        console.log(err);
+    });
+
+}
+
+
+var data;
+var tbHTML= "";
+
+
+// populate the table
+
    
+  firebase.database().ref().once("value", function(snapshot) {
+   data = snapshot.val();
+   console.log(data);
 
-$('#authenticate').submit(function(event){
-   
-   
-   var email = $('#email').val();
-   var password = $('#password').val();
+   $.each(data, function(p,v){
+      console.log(p,v);
+       trHTML = '<tr><td>' + v.dated.value + '</td><td>' 
+       + v.identifier.value + '</td><td>' 
+       + v.jsonDate.value + '</td><td>' 
+       + v.rationale.value + '</td><td>' 
+       + v.sector.value + '</td><td>' 
+       + v.target_price.value + '</td></tr>';
+       $('#location').append(trHTML);
+   })
 
-   console.log(email,password);
+  }, function (error) {
+   console.log("Error: " + error.code);
+  });
 
-
-    firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-        console.log("logged in successfull")
-    }) .catch(function(error) {
-     
-     console.log(error);
-      
-    
-
-   });
-
-
-
-   return false;
- 
-});  
 
 //Entire Form (handler)
 $('#newActivity').submit(function(event) {
@@ -49,144 +53,104 @@ $('#newActivity').submit(function(event) {
   $form.find("#saveForm").prop('disabled', true);
   
   
+   var email = $('#email').val();
+   var password = $('#password').val();
+
+   console.log(email,password);
+
   
-  var phases = $('#phases').val();
-  console.log(phases);
+ //TIMESTAMP  
+  var jsonDate = (new Date()).toJSON();
+  var backToDate = new Date();
+  console.log(jsonDate);
 
-  var phasesNotes = $('#phasesNotes').val();
-  console.log(phasesNotes);
+  //FORM inputs
+  var identifier = $('#identifier').val();
+  console.log(identifier);  
+
+  var target_price = $('#target_price').val();
+  console.log(target_price);
   
-  var xfactor= $('#xfactor').val();
-  console.log(xfactor);
-
-  var xfactorNotes= $('#xfactorNotes').val();
-  console.log(xfactorNotes);
-
-  var outcome= $('#outcome').val();
-  console.log(outcome);
-
-  var outcomeNotes= $('#outcomeNotes').val();
-  console.log(outcomeNotes);
-
-  var extra= $('#extra').val();
-  console.log(extra);
-
-  var extraNotes= $('#extraNotes').val();
-  console.log(extraNotes);
-
-  var competition= $('#competition').val();
-  console.log(competition);
-
-  var competitionNotes= $('#competitionNotes').val();
-  console.log(competitionNotes);
-
-  var other= $('#other').val();
-  console.log(other);
-
-  var otherNotes= $('#otherNotes').val();
-  console.log(otherNotes);
-
-  var catalysts= $('#catalysts').val();
-  console.log(catalysts);
-
-  var catalystsNotes= $('#catalystsNotes').val();
-  console.log(catalystsNotes);
-
-  var labor= $('#labor').val();
-  console.log(labor);
-
-  var laborNotes= $('#laborNotes').val();
-  console.log(laborNotes);
-
-  var options= $('#options').val();
-  console.log(options);
-
-  var optionsNotes= $('#optionsNotes').val();
-  console.log(optionsNotes);
-
-  var legal= $('#legal').val();
-  console.log(legal);
-
-  var legalNotes= $('#legalNotes').val();
-  console.log(legalNotes);
-
-  var volatility= $('#volatility').val();
-  console.log(volatility);
-
-  var volatilityNotes= $('#volatilityNotes').val();
-  console.log(volatilityNotes);
-
-  var torf= $('#torf').val();
-  console.log(torf);
-
-  var torfNotes= $('#torfNotes').val();
-  console.log(torfNotes);
+  var rationale = $('#rationale').val();
+  console.log(rationale);
   
-  //take the values from the form, and put them in an object
-  var newActivity= {
-    "phases": {
-       value: phases ,
-       notes: phasesNotes
+  var dated = $('#dated').val();
+  console.log(dated);
+  
+  var sector = $('#sector').val();
+  console.log(sector);  
+ 
+
+ var newActivity= {
+    "target_price": {
+       value: target_price,       
     },
-    "xfactor": {
-       value: xfactor,
-       notes:xfactorNotes
+    
+  "rationale": {
+       value: rationale,
+      },
+    
+  "dated": {
+       value: dated,
+      },   
+    
+    "jsonDate": {
+       value: jsonDate,
+      },
+    
+   "sector": {
+       value: sector,
+      }, 
+    
+    "identifier": {
+       value: identifier,   
     },
-    "outcome": {
-       value: outcome ,
-       notes: outcomeNotes
-    },
-    "extra": {
-       value: extra,
-       notes:extraNotes
-    },
-    "competition": {
-       value: competition,
-       notes: competitionNotes
-    },
-    "other": {
-       value: other,
-       notes: otherNotes
-    },
-    "catalysts": {
-       value: catalysts,
-       notes: catalystsNotes
-    },
-    "labor": {
-       value: labor,
-       notes: laborNotes
-    },
-    "options": {
-       value: options,
-       notes: optionsNotes
-    },
-    "legal": {
-       value: legal ,
-       notes: legalNotes
-    },
-    "volatility": {
-       value: volatility,
-       notes: volatilityNotes
-    },
-    "torf": {
-       value: torf,
-       notes: torfNotes
-    }
+    
   }
+
+
+  // sign in user
+   firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+        console.log("logged in successfull");
+
+        console.log(newActivity);
+
+
   
-  
-  //   // send the new data to Firebase
+   // send the new data to Firebase
 		firebase.database().ref().push(newActivity, function(err){
       if(err){
-        alert("Unable to submit form try again");
-        location.reload();
-        console.log(err);
+        alert("Unable to submit form try again please try to log in");
+
+         // sign out user after an error 
+          signOut();
+
+
+
+       
       }else{
         alert("Form submitted");
-        location.reload();
+         
+           // sign out user after every submission
+          signOut();
+
+       
        
       }
     });
+
+
+
+     }) .catch(function(error) {
+     
+       alert("Unable to login");
+        location.reload();
+            
+      
+    
+
+   });
+
 
     return false;
   })

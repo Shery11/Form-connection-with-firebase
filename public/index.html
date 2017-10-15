@@ -2,12 +2,15 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Submitting Form to Firebase</title>
+  <title>Firebase</title>
 
 
    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   
-  
+
+<!-- add this it will automatically include auth and database connection
+you can find it by clicking on the overview in the top left side of firebase page
+after that you will have to click "Add firebase to web app" from the pop up copy and paste it here -->  
 <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -30,32 +33,26 @@
         <form action="" id="authenticate">
 
            <header>
-            <h2 class="text-center">Login</h2>
+            <h2 class="text-center">Enter email and Password before every submission</h2>
            </header>
 
           <div class="row">
 
-            <div class="form-group col-xs-3">
+            <div class="form-group col-xs-6">
               <!-- <label>Email</label> -->
               <input class="form-control" type="email" name="" id="email" placeholder="Email">
             </div>
 
 
-            <div class="form-group col-xs-3">
+            <div class="form-group col-xs-6">
               <!-- <label >password</label> -->
               <input class="form-control" type="password" name="" id="password" placeholder="password">
             </div>
 
-            <div class="col-xs-3 text-right">
-              <input class="btn btn-primary" id="loginForm" name="loginForm" type="submit" value="Login"></input>
-            </div>
-            
-            <div class="col-xs-3">
-              <button class="btn btn-primary" id="logout">Logout</button>
-            </div>
           </div>
           
         </form>
+
      
       <form action="" id="newActivity">
         <header>
@@ -66,265 +63,77 @@
 
         
         
-        <div class="form-group col-xs-3">
-         <label id="type1" for="category">Phases: </label>
-          <div>
-            <select class="form-control" id="phases" name="category"> 
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
+       <div class="form-group col-xs-4">               
+      <input class="form-control" id="identifier" placeholder="identifier" >
+    </div> 
 
+    <!--  OBJECT2  -->   
+    <div class="form-group col-xs-4">              
+    <input class="form-control" id="target_price" placeholder="target_price">
+    </div> 
 
-        <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="phasesNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
+      <!--  OBJECT3  --> 
+    <div class="form-group col-xs-4">               
+    <input class="form-control" id="rationale" placeholder="rationale">
+    </div>
+
+    <!--  OBJECT4  -->   
+    <div class="form-group col-xs-4">
+      <input class="form-control" id="dated" placeholder="DD-MM-YY"> 
+    </div>
         
 
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Xfactor: </label>
-          <div>
-            <select class="form-control" id="xfactor" name="category" >
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
+      <div class="form-group col-xs-4">
+        <select class="form-control" id="sector" name="category">
+          <option value="SectorNA">Sector:</option>
+          <option value="Munchies">Munchies</option>
+          <option value="Transport">Transport</option>
+          <option value="Media">Media</option>
+          <option value="Tech">Tech</option>   
+          <option value="Energy">Energy</option>
+          <option value="HP/Bio/Pharm">HP/Bio/Pharm</option>  
+        </select>        
+      </div>   
 
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="xfactorNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Outcome: </label>
-          <div>
-            <select class="form-control" id="outcome" name="category">
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="outcomeNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Extra: </label>
-          <div>
-            <select class="form-control" id="extra" name="category">
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="extraNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Competition: </label>
-          <div>
-            <select class="form-control" id="competition" name="category">
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="competitionNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Other: </label>
-          <div>
-            <select class="form-control" id="other" name="category">
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="otherNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Catalysts: </label>
-          <div>
-            <select class="form-control" id="catalysts" name="category" >
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="catalystsNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Labor: </label>
-          <div>
-            <select class="form-control" id="labor" name="category">
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="laborNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Options: </label>
-          <div>
-            <select class="form-control" id="options" name="category">
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="optionsNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Legal: </label>
-          <div>
-            <select class="form-control" id="legal" name="category">
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="legalNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">Volatility: </label>
-          <div>
-            <select class="form-control" id="volatility" name="category" >
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="item1"> Item 1</option>
-              <option value="item2"> Item 2</option>
-            </select>
-          </div>
-        </div>
-
-         <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="volatilityNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-
-         <div class="form-group col-xs-3">
-         <label id="type1" for="category">T or F: </label>
-          <div>
-            <select class="form-control" id="torf" name="category">
-               <!-- Inn order to add your own values change the value property  of options tag and the text between option tags -->
-              <option value="-">-</option>
-              <option value="T"> T</option>
-              <option value="F"> F</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group col-xs-3">
-          <label class="desc" id="description1" for="Field2">Notes </label>
-          <div>
-            <textarea class="form-control" id="torfNotes" name="Field2" spellcheck="true" rows="2" value="default"></textarea>
-          </div>
-         </div>
-        <br />
-        
-
-        <div class="col-xs-4"></div>   
         <div class="col-xs-4 text-center">
-          <input class="btn btn-primary" id="saveForm" name="saveForm" type="submit" value="Submit"></input>
-        </div>
-        <div class="col-xs-4"></div>   
-        
-      </div> 
-      </form>
+          <input class="btn btn-primary" id="saveForm" name="saveForm" type="submit" value="Submit">
+        </div> 
+     
+
+     </form>
   
+    </div>
+
+    <hr>
+
+<!-- table to display the data -->
+    <div class="container">
+  <table id="location" class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Dated</th>
+        <th>Identifier</th>
+        <th>JsonDate</th>
+        <th>Rationale</th>
+        <th>Sector</th>
+        <th>Target Price</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+    </tbody>
+  </table>
+</div>
 
   
-    </body>
-  
-</html>
+   
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
     <script  src="js/index.js"></script>
 
 </body>
 </html>
+
+
+
+<!-- my mail shery_kirmani(at the rate)hotmail.com -->
